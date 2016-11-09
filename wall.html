@@ -19,30 +19,19 @@
 	<script>
 		var token = '208560590.a3a71b3.e16b118424394ce9a0f4ff433bc049db',
 		    username = 'burla2222', // rudrastyh - my username :)
-		    num_photos = 20;
+		    num_photos = 20,
+		    hashtag='graffiti';
 
 		$.ajax({ // the first ajax request returns the ID of user rudrastyh
-			url: 'https://api.instagram.com/v1/users/search',
+			url: 'https://api.instagram.com/v1/tags/' + hashtag + '/media/recent',
 			dataType: 'jsonp',
 			type: 'GET',
-			data: {access_token: token, q: username}, // actually it is just the search by username
+			data: {access_token: token, count: num_photos},
 			success: function(data){
 				console.log(data);
-				$.ajax({
-					url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent', // specify the ID of the first found user
-					dataType: 'jsonp',
-					type: 'GET',
-					data: {access_token: token, count: num_photos},
-					success: function(data2){
-						console.log(data2);
-						for(x in data2.data){
-							$('#container-insta-image').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
-						}
-					},
-					error: function(data2){
-						console.log(data2);
-					}
-				});
+				for(x in data.data){
+					$('ul').append('<li><img src="'+data.data[x].images.standard_resolution.url+'"></li>');  
+				}
 			},
 			error: function(data){
 				console.log(data);
