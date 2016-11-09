@@ -15,7 +15,13 @@
 	<!-- js -->
 	<script src="js/nprogress.js"></script>
 	<script src="js/jquery-1.11.2.min.js"></script>
-	<script src="js/instafeed.min.js"></script>
+	
+	<script>
+		$.ajax({
+			url: "https://api.instagram.com/oauth/authorize/?client_id=a3a71b37b29d4d6ca0ac1ca40a659309&redirect_uri=http://burla22.com/wall.html&response_type=token", success: function(result){
+			console.log(result);
+		}});
+	</script>
 </head>
 
 <body>
